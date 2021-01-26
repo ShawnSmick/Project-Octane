@@ -51,10 +51,8 @@ public class ClientHandle : MonoBehaviour
         if (GameManager.players.ContainsKey(_id))
         {
 
-            //GameManager.players[_id].positionActual =
-                _packet.ReadVector3();
-            //GameManager.players[_id].transform.rotation = 
-                _packet.ReadQuaternion();
+            GameManager.players[_id].GHOST.position =_packet.ReadVector3();
+            GameManager.players[_id].GHOST.rotation =  _packet.ReadQuaternion();
             Vector3 velocity = _packet.ReadVector3(); //We will use this for client prediction.
             GameManager.players[_id].Health = _packet.ReadInt();
             GameManager.players[_id].Turbo = _packet.ReadFloat();
@@ -68,22 +66,32 @@ public class ClientHandle : MonoBehaviour
     {
         GameManager.instance.SpawnMissile(_packet.ReadInt(),_packet.ReadInt(),_packet.ReadInt(),_packet.ReadVector3(),_packet.ReadQuaternion());
     }
-    public static void MissileUpdate(Packet _packet)
+    /*  public static void MissileUpdate(Packet _packet)
+      {
+          int _id = _packet.ReadInt();
+          Vector3 Position = _packet.ReadVector3();
+          Quaternion Rotation = _packet.ReadQuaternion();
+          if (GameManager.missiles.ContainsKey(_id))
+          {
+              GameManager.missiles[_id].updatePosition(Position,Rotation);
+          }
+
+      }*/
+    public static void NetworkObjectUpdate(Packet _packet)
     {
         int _id = _packet.ReadInt();
         Vector3 Position = _packet.ReadVector3();
         Quaternion Rotation = _packet.ReadQuaternion();
-        if (GameManager.missiles.ContainsKey(_id))
+        if (GameManager.NetworkedObjects.ContainsKey(_id))
         {
-            GameManager.missiles[_id].updatePosition(Position,Rotation);
+            GameManager.NetworkedObjects[_id].UpdatePosition(Position,Rotation);
         }
-            
     }
     public static void MissileDestroyed(Packet _packet)
     {
         int _id = _packet.ReadInt();
-        if (GameManager.missiles.ContainsKey(_id))
-            GameManager.missiles[_id].isKill();
+        if (GameManager.NetworkedObjects.ContainsKey(_id))
+            GameManager.NetworkedObjects[_id].isKill();
     }
     public static void SpawnPickup(Packet _packet)
     {
@@ -93,8 +101,8 @@ public class ClientHandle : MonoBehaviour
     public static void KillPickup(Packet _packet)
     {
         int _id = _packet.ReadInt();
-        if (GameManager.pickups.ContainsKey(_id))
-            GameManager.pickups[_id].isKill();
+        if (GameManager.NetworkedObjects.ContainsKey(_id))
+            GameManager.NetworkedObjects[_id].isKill();
     }
     public static void SetAmmo(Packet _packet)
     {

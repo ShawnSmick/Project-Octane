@@ -22,7 +22,8 @@ public enum ServerPackets
     SetEnergy,
     SetTurbo,
     ToggleDebuffs,
-    CarPosition
+    CarPosition,
+    UpdateNetworkObject
 }
 /// <summary>Sent from client to server.</summary>
 public enum ClientPackets

@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Pickup : MonoBehaviour
+public class Pickup : NetworkObject
 {
     // Start is called before the first frame update
-    public int id;
+
     void Start()
     {
         
@@ -16,9 +16,5 @@ public class Pickup : MonoBehaviour
     {
         transform.Rotate(new Vector3(0,80 * Time.deltaTime,0));
     }
-    public void isKill()
-    {
-        GameManager.pickups.Remove(id);
-        Destroy(gameObject);
-    }
+    
 }

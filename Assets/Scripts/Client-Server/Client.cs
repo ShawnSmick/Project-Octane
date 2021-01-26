@@ -255,7 +255,7 @@ public class Client : MonoBehaviour
             {(int)ServerPackets.playerRotation, ClientHandle.PlayerRotation},
             {(int)ServerPackets.Pong, ClientHandle.Pong},
             {(int)ServerPackets.TestMissile, ClientHandle.TestMissile },
-            {(int)ServerPackets.MissileUpdate, ClientHandle.MissileUpdate },
+            {(int)ServerPackets.UpdateNetworkObject, ClientHandle.NetworkObjectUpdate },
             {(int)ServerPackets.MissileDestroyed, ClientHandle.MissileDestroyed },
              {(int)ServerPackets.SpawnPickup, ClientHandle.SpawnPickup },
               {(int)ServerPackets.KillPickup, ClientHandle.KillPickup },

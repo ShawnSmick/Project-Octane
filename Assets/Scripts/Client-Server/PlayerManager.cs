@@ -22,8 +22,10 @@ public class PlayerManager : MonoBehaviour
     public GameObject Frozen;
     public ParticleSystem Burning;
     public Radar radar;
+    public Transform GHOST;
     public void Start()
     {
+        GHOST.parent = null;
         Ammo = new int[GameManager.instance.Missiles.Length];
     }
     public void Update()

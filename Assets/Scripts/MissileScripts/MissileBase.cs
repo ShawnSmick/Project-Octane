@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MissileBase : MonoBehaviour
+public class MissileBase : NetworkObject
 {
     // Start is called before the first frame update
     [SerializeField]
     private float speed = 5f;
-    public int id;
+    //public int id;
     private GameObject _parent;
     
     //public Target target;
@@ -39,7 +39,7 @@ public class MissileBase : MonoBehaviour
     {
         return _parent;
     }
-    private void OnTriggerEnter(Collider other)
+    /*private void OnTriggerEnter(Collider other)
     {
         //Make sure you are not hitting daddy, he doesnt like that. Also make sure you are not colliding with fellow projectiles
         Debug.Log("HIT");
@@ -49,8 +49,8 @@ public class MissileBase : MonoBehaviour
             Rigidbody CollidedRB = other.gameObject.GetComponent<Rigidbody>();
            // isKill();
         }
-    }
-    public void isKill()
+    }*/
+    public override void isKill()
     {
         if (emit != null)
         {
@@ -61,8 +61,7 @@ public class MissileBase : MonoBehaviour
              GameObject exp = Instantiate(explosion,transform.position,Quaternion.identity);
              Destroy(exp,5);
          }
-        GameManager.missiles.Remove(id);
-        Destroy(gameObject); //Dead... not big surprise.
+        base.isKill();
     }
     public void updatePosition(Vector3 _pos,Quaternion _rot)
     {

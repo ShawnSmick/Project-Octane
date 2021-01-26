@@ -34,6 +34,7 @@ public class PlayerController : MonoBehaviour
     CarEngine child;
     private void Awake()
     {
+
         child = GetComponent<CarEngine>();
         manager = GetComponent<PlayerManager>();
         controls = new PlayerControls();
